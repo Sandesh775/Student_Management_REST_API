@@ -3,15 +3,27 @@ package com.example.Student_Management_REST_API.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.context.annotation.Bean;
+
 
 @Entity
 public class Student {
     @Id
     @GeneratedValue
     private Long id;
+    @NotBlank(message = "Student name cannot be blank.")
     private String fullName;
+    @NotBlank(message = "Email cannot be blank.")
+    @Email(message = "Invalid email format")
     private String email;
-    private int age;
+    @NotNull(message = "Age is required.")
+    @Min(value = 0, message = "Age cannot be negative")
+    private Integer age;
+    @NotBlank
     private String course;
 
     public long getId() {
